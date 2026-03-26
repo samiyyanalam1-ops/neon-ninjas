@@ -1023,6 +1023,17 @@ function resizeAll(){
   if(active&&player.y>canvas.height)player.y=canvas.height*.5;
   initStars();
 }
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then((registration) => {
+          console.log('Service Worker registered with scope:', registration.scope);
+        })
+        .catch((error) => {
+          console.error('Service Worker registration failed:', error);
+        });
+    });
+}
 window.addEventListener('resize',resizeAll);
 screen.orientation&&screen.orientation.addEventListener('change',()=>setTimeout(resizeAll,120));
 
